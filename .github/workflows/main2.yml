@@ -1,0 +1,50 @@
+name: Conditional Script Execution Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      comp:
+        description: 'Component to run'
+        required: true
+        default: 'comp1'
+        type: choice
+        options:
+          - comp1
+          - comp2
+          - comp4
+
+jobs:
+  execute-scripts-job:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Read and execute scripts
+      run: |
+        pwd
+        comp=${{ github.event.inputs.comp }}
+        if [ "$comp" == "comp1" ]; then
+          echo "Executing scripts in Addition and Subtraction folders"
+          find Addition -name "*.py" -exec python {} \;
+          find Subtraction -name "*.py" -exec python {} \;
+        elif [ "$comp" == "comp2" ]; then
+          echo "Executing scripts in Addition and Multiplication folders"
+          find Addition -name "*.py" -exec python {} \;
+          find Multiplication -name "*.py" -exec python {} \;
+        elif [ "$comp" == "comp4" ]; then
+          echo "Executing all scripts in all folders"
+          find Addition -name "*.py" -exec python {} \;
+          find Subtraction -name "*.py" -exec python {} \;
+          find Multiplication -name "*.py" -exec python {} \;
+          find Division -name "*.py" -exec python {} \;
+        else
+          echo "Invalid component specified"
+          exit 1
+        fi
