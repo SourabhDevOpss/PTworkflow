@@ -28,7 +28,7 @@ jobs:
 
     - name: Read and execute scripts
       env:
-        SECRET_PARAM: 10
+        SECRET_PARAM: 100
       run: |
         comp=${{ github.event.inputs.comp }}
         echo "Component selected: $comp"
@@ -43,8 +43,8 @@ jobs:
 
           if $in_section; then
             # Replace placeholder with actual secret value
-            line=$(echo $line | sed "s/\$SECRET_PARAM/$SECRET_PARAM/g")
+            line=$(echo $line | sed "s/@SECRET_PARAM/$SECRET_PARAM/g")
             echo "Running script: $line"
-            python $line
+            python $(echo $line | awk '{print $1}') $(echo $line | awk '{$1=""; print $0}')
           fi
-        done < scripts_to_run3.txt
+        done < scripts_to_run.txt
