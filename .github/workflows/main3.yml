@@ -1,0 +1,51 @@
+name: Main3
+
+on:
+  workflow_dispatch:
+    inputs:
+      comp:
+        description: 'Component to run'
+        required: true
+        default: 'comp1'
+        type: choice
+        options:
+          - comp1
+          - comp2
+          - comp4
+
+jobs:
+  execute-scripts-job:
+    runs-on: ubuntu-latest
+
+    env:
+      NUMBER3: 15  # Declare NUMBER3 as an environment variable
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Read and execute scripts
+      run: |
+        comp=${{ github.event.inputs.comp }}
+        echo "Component selected: $comp"
+        in_section=false
+        while IFS= read -r line; do
+          if [[ $line == "$comp:" ]]; then
+            in_section=true
+            continue
+          elif [[ $line == *:* ]]; then
+            in_section=false
+          fi
+
+          if [ "$in_section" = true ]; then
+            script=$(echo $line | awk '{print $1}')
+            params=$(echo $line | awk '{$1=""; print $0}')
+            echo "Running script: $script with params: $params"
+            python $script $params -Number3 $NUMBER3
+          fi
+        done < scripts_to_run2.txt
