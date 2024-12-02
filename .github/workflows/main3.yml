@@ -1,4 +1,4 @@
-name: Main3
+name: Conditional Script Execution Workflow
 
 on:
   workflow_dispatch:
@@ -16,9 +16,6 @@ on:
 jobs:
   execute-scripts-job:
     runs-on: ubuntu-latest
-
-    env:
-      NUMBER3: 15  # Declare NUMBER3 as an environment variable
 
     steps:
     - name: Checkout repository
@@ -42,10 +39,10 @@ jobs:
             in_section=false
           fi
 
-          if [ "$in_section" = true ]; then
-            script=$(echo $line | awk '{print $1}')
-            params=$(echo $line | awk '{$1=""; print $0}')
-            echo "Running script: $script with params: $params"
-            python $script $params -Number3 $NUMBER3
+          if $in_section; then
+            echo "Running script: $line"
+            python $line
+            echo "helloo-worlds
+            echo"new script
           fi
         done < scripts_to_run2.txt
