@@ -1,0 +1,50 @@
+name: Script4
+
+on:
+  workflow_dispatch:
+    inputs:
+      comp:
+        description: 'Component to run'
+        required: true
+        default: 'comp1'
+        type: choice
+        options:
+          - comp1
+          - comp2
+          - comp4
+
+jobs:
+  execute-scripts-job:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Read and execute scripts
+      env:
+        SECRET_PARAM: 10
+      run: |
+        comp=${{ github.event.inputs.comp }}
+        echo "Component selected: $comp"
+        in_section=false
+        while IFS= read -r line; do
+          if [[ $line == "$comp:" ]]; then
+            in_section=true
+            continue
+          elif [[ $line == *:* ]]; then
+            in_section=false
+          fi
+
+          if $in_section; then
+            # Replace placeholder with actual secret value
+            line=$(echo $line | sed "s/\$SECRET_PARAM/$SECRET_PARAM/g")
+            echo "Running script: $line"
+            python $line
+          fi
+        done < scripts_to_run3.txt
