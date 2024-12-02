@@ -1,0 +1,4 @@
+Addition/add.py -Number1 5 -Number2 10
+Addition/add3.py -Number1 5 -Number2 10 -Number3 15
+Multiplication/multiply.py -Number1 5 -Number2 10
+Multiplication/multiply3.py -Number1 2 -Number2 3 -Number3 4
