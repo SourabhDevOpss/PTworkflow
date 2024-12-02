@@ -47,4 +47,4 @@ jobs:
             echo "Running script: $line"
             python $(echo $line | awk '{print $1}') $(echo $line | awk '{$1=""; print $0}')
           fi
-        done < scripts_to_run.txt
+        done < scripts_to_run3.txt
