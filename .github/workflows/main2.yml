@@ -1,4 +1,4 @@
-name: Conditional Script Execution Workflow
+name: Script2
 
 on:
   workflow_dispatch:
