@@ -22,7 +22,9 @@ jobs:
 
     - name:  Run Python script
       run: |
+       cd Multiplication
+       pwd
        while IFS= read -r line; do
           echo "Running script: $line"
           python $line
-       done < ./scripts_to_run.txt
+       done < scripts_to_run.txt 
