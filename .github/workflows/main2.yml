@@ -26,25 +26,28 @@ jobs:
       with:
         python-version: '3.x'
 
+ 
     - name: Read and execute scripts
       run: |
-        pwd
         comp=${{ github.event.inputs.comp }}
-        if [ "$comp" == "comp1" ]; then
-          echo "Executing scripts in Addition and Subtraction folders"
-          find Addition -name "*.py" -exec python {} \;
-          find Subtraction -name "*.py" -exec python {} \;
-        elif [ "$comp" == "comp2" ]; then
-          echo "Executing scripts in Addition and Multiplication folders"
-          find Addition -name "*.py" -exec python {} \;
-          find Multiplication -name "*.py" -exec python {} \;
-        elif [ "$comp" == "comp4" ]; then
-          echo "Executing all scripts in all folders"
-          find Addition -name "*.py" -exec python {} \;
-          find Subtraction -name "*.py" -exec python {} \;
-          find Multiplication -name "*.py" -exec python {} \;
-          find Division -name "*.py" -exec python {} \;
-        else
-          echo "Invalid component specified"
-          exit 1
-        fi
+        echo "Component selected: $comp"
+        while IFS= read -r line; do
+          script=$(echo $line | awk '{print $1}')
+          if [ "$comp" == "comp1" ]; then
+            if [[ $script == Addition/* || $script == Subtraction/* ]]; then
+              echo "Running script: $line"
+              python $line
+            fi
+          elif [ "$comp" == "comp2" ]; then
+            if [[ $script == Addition/* || $script == Multiplication/* ]]; then
+              echo "Running script: $line"
+              python $line
+            fi
+          elif [ "$comp" == "comp4" ]; then
+            echo "Running script: $line"
+            python $line
+          else
+            echo "Invalid component specified"
+            exit 1
+          fi
+        done < scripts_to_run.txt
