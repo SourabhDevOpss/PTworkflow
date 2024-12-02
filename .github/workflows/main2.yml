@@ -12,7 +12,8 @@ on:
           - comp1
           - comp2
           - comp4
-
+env:
+  Number3 : 1
 jobs:
   execute-scripts-job:
     runs-on: ubuntu-latest
