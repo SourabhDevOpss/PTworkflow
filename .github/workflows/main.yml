@@ -22,7 +22,6 @@ jobs:
 
     - name:  Run Python script
       run: |
-       cd Multiplication
        pwd
        while IFS= read -r line; do
           echo "Running script: $line"
