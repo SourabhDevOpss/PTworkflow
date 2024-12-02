@@ -1,7 +1,7 @@
 Addition/add.py -Number1 5 -Number2 10
-Addition/add3.py -Number1 5 -Number2 10 -Number3 $Number3
+Addition/add3.py -Number1 5 -Number2 10 -Number3 "${{ env.Number3}}"
 Multiplication/multiply.py -Number1 5 -Number2 10
-Multiplication/multiply3.py -Number1 2 -Number2 3 -Number3 Number3
+Multiplication/multiply3.py -Number1 2 -Number2 3 -Number3 $Number3
 Subtraction/sub.py -Number1 10 -Number2 5
 Subtraction/sub.py -Number1 100 -Number2 5
 Division/div.py -Number1 100 -Number2 20
