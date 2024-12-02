@@ -19,5 +19,6 @@ jobs:
 
     - name: Run Hello World script
       run: |
-        echo 'print("Hello, World!")' > hello_world.py
-        python hello_world.py
+        cd Addition
+        python add.py -Number1 5 -Number2 10
+    
