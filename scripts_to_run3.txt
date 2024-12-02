@@ -1,0 +1,21 @@
+comp1:
+Addition/add.py -Number1 5 -Number2 $SECRET_PARAM
+Addition/add3.py -Number1 5 -Number2 10 -Number3 $SECRET_PARAM
+Subtraction/sub.py -Number1 10 -Number2 5
+Subtraction/sub.py -Number1 100 -Number2 5
+
+comp2:
+Addition/add.py -Number1 5 -Number2 $SECRET_PARAM
+Addition/add3.py -Number1 5 -Number2 10 -Number3 $SECRET_PARAM
+Multiplication/multiply.py -Number1 5 -Number2 10
+Multiplication/multiply3.py -Number1 2 -Number2 3 -Number3 4
+
+comp4:
+Addition/add.py -Number1 5 -Number2 $SECRET_PARAM
+Addition/add3.py -Number1 5 -Number2 10 -Number3 $SECRET_PARAM
+Multiplication/multiply.py -Number1 5 -Number2 10
+Multiplication/multiply3.py -Number1 2 -Number2 3 -Number3 4
+Subtraction/sub.py -Number1 10 -Number2 5
+Subtraction/sub.py -Number1 100 -Number2 5
+Division/div.py -Number1 100 -Number2 20
+Division/div.py -Number1 100 -Number2 50
