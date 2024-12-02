@@ -22,7 +22,7 @@ jobs:
         python ./Addition/add.py -Number1 5 -Number2 10
     - name:  Run Python script
       run: |
-        python ./Addition/addition.py -Number1 5 -Number2 10 -Number3 15
+        python ./Addition/add3.py -Number1 5 -Number2 10 -Number3 15
     - name:  Run Python script
       run: |
         python ./Multiplication/multiply.py -Number1 5 -Number2 10
